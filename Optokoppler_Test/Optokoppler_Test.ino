@@ -29,104 +29,21 @@ Serial.begin(19200);
   pinMode(optoW1,INPUT);
   pinMode(relayW1,OUTPUT);
   pinMode(servoW1,OUTPUT);
-  if (optoW1 == hi) {
-    servoObjW1.attach(servoW1);
-      delay(200);
-      if (servoObjW1.attached()) {
-        servoObjW1.write(100);  
-        delay(200);
-        //servoObjW1.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW1,lo);
-  } else {
-    servoObjW1.attach(servoW1);
-       delay(200);
-      if (servoObjW1.attached()) {
-        servoObjW1.write(20);  
-        delay(200);
-        //servoObjW1.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW1,hi);
-  }
+ 
   
   pinMode(optoW2,INPUT);
   pinMode(relayW2,OUTPUT);
   pinMode(servoW2,OUTPUT);
-  if (optoW2 == hi) {
-    servoObjW2.attach(servoW2);
-      delay(200);
-      if (servoObjW2.attached()) {
-        servoObjW2.write(100);  
-        delay(200);
-        //servoObjW2.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW2,lo);
-  } else {
-    servoObjW2.attach(servoW2);
-       delay(200);
-      if (servoObjW2.attached()) {
-        servoObjW2.write(20);  
-        delay(200);
-        //servoObjW2.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW2,hi);
-  }
   
   pinMode(optoW3,INPUT);
   pinMode(relayW3,OUTPUT);
   pinMode(servoW3,OUTPUT);
-  if (optoW3 == hi) {
-    servoObjW3.attach(servoW3);
-      delay(200);
-      if (servoObjW3.attached()) {
-        servoObjW3.write(100);  
-        delay(200);
-        //servoObjW3.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW3,lo);
-  } else {
-    servoObjW3.attach(servoW3);
-       delay(200);
-      if (servoObjW3.attached()) {
-        servoObjW3.write(20);  
-        delay(200);
-        //servoObjW3.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW3,hi);
-  }
   
   pinMode(optoW4,INPUT);
   pinMode(relayW4,OUTPUT);
   pinMode(servoW4,OUTPUT);
-  if (optoW4 == hi) {
-    servoObjW4.attach(servoW4);
-      delay(200);
-      if (servoObjW4.attached()) {
-        servoObjW4.write(100);  
-        delay(200);
-        //servoObjW4.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW4,lo);
-  } else {
-    servoObjW4.attach(servoW4);
-       delay(200);
-      if (servoObjW4.attached()) {
-        servoObjW4.write(20);  
-        delay(200);
-        //servoObjW4.detach();
-        delay(200);        
-      }  
-    digitalWrite(relayW4,hi);
-  }
   
-  delay(5000);
+  delay(1000);
 }
 
 void loop() {
@@ -246,4 +163,4 @@ void loop() {
       }
     }
     digitalWrite(relayW4,lo);
-  }
+  }}
