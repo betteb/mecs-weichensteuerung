@@ -54,7 +54,7 @@ void setup() {
 // e.g. setServoPulse(0, 0.001) is a ~1 millisecond pulse width. its not precise!
 void setServoPulse(uint8_t n, double pulse) {
   double pulselength;
-
+  pinMode(12, INPUT);
   
   pulselength = 1000000;   // 1,000,000 us per second
   pulselength /= 60;   // 60 Hz
@@ -68,8 +68,11 @@ void setServoPulse(uint8_t n, double pulse) {
 }
 
 void loop() {
+  Serial.println("EINGNAG 12");
+  Serial.println(digitalRead(12));
+  delay(1000);
   // Drive each servo one at a time
-  Serial.println(servonum);
+  /* Serial.println(servonum);
   for (uint16_t pulselen = SERVOMIN; pulselen < SERVOMAX; pulselen++) {
     pwm.setPWM(servonum, 0, pulselen);
   }
@@ -83,5 +86,5 @@ void loop() {
 
   //servonum ++;
   //if (servonum > 7) servonum = 0;
-  servonum = 3;
+  servonum = 3; */
 }
