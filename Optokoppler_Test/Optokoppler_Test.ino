@@ -28,10 +28,27 @@ Serial.begin(19200);
   
   pinMode(optoW1,INPUT);
   pinMode(relayW1,OUTPUT);
+  pinMode(servoW1,OUTPUT);
   if (optoW1 == hi) {
     servoObjW1.attach(servoW1);
+      delay(200);
+      if (servoObjW1.attached()) {
+        servoObjW1.write(100);  
+        delay(200);
+        //servoObjW1.detach();
+        delay(200);        
+      }  
+    digitalWrite(relayW1,lo);
   } else {
-    
+    servoObjW1.attach(servoW1);
+       delay(200);
+      if (servoObjW1.attached()) {
+        servoObjW1.write(20);  
+        delay(200);
+        //servoObjW1.detach();
+        delay(200);        
+      }  
+    digitalWrite(relayW1,hi);
   }
   
   pinMode(optoW2,INPUT);
@@ -43,7 +60,7 @@ Serial.begin(19200);
       if (servoObjW2.attached()) {
         servoObjW2.write(100);  
         delay(200);
-        servoObjW2.detach();
+        //servoObjW2.detach();
         delay(200);        
       }  
     digitalWrite(relayW2,lo);
@@ -51,9 +68,9 @@ Serial.begin(19200);
     servoObjW2.attach(servoW2);
        delay(200);
       if (servoObjW2.attached()) {
-        servoObjW2.write(70);  
+        servoObjW2.write(20);  
         delay(200);
-        servoObjW2.detach();
+        //servoObjW2.detach();
         delay(200);        
       }  
     digitalWrite(relayW2,hi);
@@ -61,28 +78,87 @@ Serial.begin(19200);
   
   pinMode(optoW3,INPUT);
   pinMode(relayW3,OUTPUT);
+  pinMode(servoW3,OUTPUT);
   if (optoW3 == hi) {
     servoObjW3.attach(servoW3);
+      delay(200);
+      if (servoObjW3.attached()) {
+        servoObjW3.write(100);  
+        delay(200);
+        //servoObjW3.detach();
+        delay(200);        
+      }  
+    digitalWrite(relayW3,lo);
   } else {
-    
+    servoObjW3.attach(servoW3);
+       delay(200);
+      if (servoObjW3.attached()) {
+        servoObjW3.write(20);  
+        delay(200);
+        //servoObjW3.detach();
+        delay(200);        
+      }  
+    digitalWrite(relayW3,hi);
   }
   
   pinMode(optoW4,INPUT);
   pinMode(relayW4,OUTPUT);
+  pinMode(servoW4,OUTPUT);
   if (optoW4 == hi) {
     servoObjW4.attach(servoW4);
+      delay(200);
+      if (servoObjW4.attached()) {
+        servoObjW4.write(100);  
+        delay(200);
+        //servoObjW4.detach();
+        delay(200);        
+      }  
+    digitalWrite(relayW4,lo);
   } else {
-    
+    servoObjW4.attach(servoW4);
+       delay(200);
+      if (servoObjW4.attached()) {
+        servoObjW4.write(20);  
+        delay(200);
+        //servoObjW4.detach();
+        delay(200);        
+      }  
+    digitalWrite(relayW4,hi);
   }
+  
   delay(5000);
 }
 
 void loop() {
   delay(100);
+  
   if (digitalRead(optoW1) == hi) {
     Serial.println("Weiche1 HIGH");
+    if (servoObjW1.read() != 100){
+      servoObjW1.attach(servoW1);
+      delay(200);
+      if (servoObjW1.attached()) {
+        for (int pulselen = servoObjW1.read(); pulselen < 100; pulselen++) {
+          servoObjW1.write(pulselen);  
+          delay(40);
+        }  
+      }
+    }
+    digitalWrite(relayW1,hi);
+    
   } else {
     Serial.println("Weiche1 LOW");
+    if (servoObjW1.read() != 25  ){
+      servoObjW1.attach(servoW1);
+      delay(200);
+      if (servoObjW1.attached()) {
+        for (int pulselen = servoObjW1.read(); pulselen > 25; pulselen--) {
+          servoObjW1.write(pulselen);  
+          delay(40);
+        }
+      }
+    }
+    digitalWrite(relayW1,lo);
   }
 
   if (digitalRead(optoW2) == hi) {
@@ -91,38 +167,83 @@ void loop() {
       servoObjW2.attach(servoW2);
       delay(200);
       if (servoObjW2.attached()) {
-        servoObjW2.write(100);  
-        delay(200);
-        servoObjW2.detach();
-        delay(200);        
-      }  
+        for (int pulselen = servoObjW2.read(); pulselen < 100; pulselen++) {
+          servoObjW2.write(pulselen);  
+          delay(40);
+        }  
+      }
     }
     digitalWrite(relayW2,hi);
+    
   } else {
     Serial.println("Weiche2 LOW");
-    if (servoObjW2.read() != 71  ){
+    if (servoObjW2.read() != 25  ){
       servoObjW2.attach(servoW2);
       delay(200);
       if (servoObjW2.attached()) {
-        servoObjW2.write(70);  
-        delay(200);
-        servoObjW2.detach();
-        delay(200);       
+        for (int pulselen = servoObjW2.read(); pulselen > 25; pulselen--) {
+          servoObjW2.write(pulselen);  
+          delay(40);
+        }
       }
     }
     digitalWrite(relayW2,lo);
   }
 
-if (digitalRead(optoW3) == hi) {
-    Serial.println("Weiche3 HIGH");
+    if (digitalRead(optoW3) == hi) {
+    Serial.println("Weiche2 HIGH");
+    if (servoObjW3.read() != 100){
+      servoObjW3.attach(servoW3);
+      delay(200);
+      if (servoObjW3.attached()) {
+        for (int pulselen = servoObjW3.read(); pulselen < 100; pulselen++) {
+          servoObjW3.write(pulselen);  
+          delay(40);
+        }  
+      }
+    }
+    digitalWrite(relayW3,hi);
+    
   } else {
     Serial.println("Weiche3 LOW");
+    if (servoObjW3.read() != 25  ){
+      servoObjW3.attach(servoW3);
+      delay(200);
+      if (servoObjW3.attached()) {
+        for (int pulselen = servoObjW3.read(); pulselen > 25; pulselen--) {
+          servoObjW3.write(pulselen);  
+          delay(40);
+        }
+      }
+    }
+    digitalWrite(relayW3,lo);
   }
 
   if (digitalRead(optoW4) == hi) {
     Serial.println("Weiche4 HIGH");
+    if (servoObjW4.read() != 100){
+      servoObjW4.attach(servoW4);
+      delay(200);
+      if (servoObjW4.attached()) {
+        for (int pulselen = servoObjW4.read(); pulselen < 100; pulselen++) {
+          servoObjW4.write(pulselen);  
+          delay(40);
+        }  
+      }
+    }
+    digitalWrite(relayW4,hi);
+    
   } else {
     Serial.println("Weiche4 LOW");
+    if (servoObjW4.read() != 25  ){
+      servoObjW4.attach(servoW4);
+      delay(200);
+      if (servoObjW4.attached()) {
+        for (int pulselen = servoObjW4.read(); pulselen > 25; pulselen--) {
+          servoObjW4.write(pulselen);  
+          delay(40);
+        }
+      }
+    }
+    digitalWrite(relayW4,lo);
   }
-  Serial.println("---");
-}
