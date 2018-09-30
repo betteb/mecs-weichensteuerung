@@ -54,7 +54,7 @@ Servo servoObjW3;
 Servo servoObjW4;
 
 void setup() {
-Serial.begin(19200);
+  Serial.begin(19200);
   
   pinMode(optoW1,INPUT);
   pinMode(relayW1,OUTPUT);
@@ -187,7 +187,7 @@ void loop() {
 
 /*
 * Weiche 4
-*/
+ */
   if (digitalRead(optoW4) == hi) {
     Serial.println("Weiche4 HIGH");
     if (servoObjW4.read() != W4_Hi_Winkel){
