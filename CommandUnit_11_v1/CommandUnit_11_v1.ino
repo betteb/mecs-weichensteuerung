@@ -10,24 +10,24 @@
 #include <Servo.h>
 
 //Weiche 1 Einstellungen(müssen pro Weichen angepasst werden)
-#define W1_Hi_Winkel 90
-#define W1_Lo_Winkel 90
+#define W1_Hi_Winkel 87
+#define W1_Lo_Winkel 47
 #define W1_Geschwindigkeit 5
 
 //Weiche 2 Einstellungen(müssen pro Weichen angepasst werden)
-#define W2_Hi_Winkel 90
-#define W2_Lo_Winkel 90
+#define W2_Hi_Winkel 97
+#define W2_Lo_Winkel 40
 
 #define W2_Geschwindigkeit 5
 
 //Weiche 3 Einstellungen(müssen pro Weichen angepasst werden)
-#define W3_Hi_Winkel 90
-#define W3_Lo_Winkel 90
+#define W3_Hi_Winkel 80
+#define W3_Lo_Winkel 30
 #define W3_Geschwindigkeit 5
 
 //Weiche 4 Einstellungen(müssen pro Weichen angepasst werden)
 #define W4_Hi_Winkel 90
-#define W4_Lo_Winkel 90
+#define W4_Lo_Winkel 40
 #define W4_Geschwindigkeit 5
 
 
@@ -89,7 +89,7 @@ void setup() {
 // TODO: Attach noch anpassen
 
 void loop() {
-  delay(1);
+  delay(100);
 
 /*
  * Weiche 1
@@ -98,11 +98,11 @@ void loop() {
     Serial.println("Weiche1 LOW");
     if (!servoObjW1.attached()) {
       servoObjW1.attach(servoW1);
-      delay(10);
+      delay(200);
     }
     
-    if (servoObjW1.read() != W1_Lo_Winkel){
-      for (int pulselen = servoObjW1.read(); pulselen < W1_Lo_Winkel; pulselen++) {
+    if (servoObjW1.read() != W1_Hi_Winkel){
+      for (int pulselen = servoObjW1.read(); pulselen < W1_Hi_Winkel; pulselen++) {
         servoObjW1.write(pulselen);  
         delay(W1_Geschwindigkeit);
       }  
@@ -116,8 +116,8 @@ void loop() {
       delay(10); 
     }
     
-    if (servoObjW1.read() != W1_Hi_Winkel){
-      for (int pulselen = servoObjW1.read(); pulselen > W1_Hi_Winkel; pulselen--) {
+    if (servoObjW1.read() != W1_Lo_Winkel){
+      for (int pulselen = servoObjW1.read(); pulselen > W1_Lo_Winkel; pulselen--) {
         servoObjW1.write(pulselen);  
         delay(W1_Geschwindigkeit);
       }
@@ -130,95 +130,66 @@ void loop() {
  */
   if (digitalRead(optoW2) == lo) {
     Serial.println("Weiche2 LOW");
-    if (servoObjW2.read() != W2_Lo_Winkel){
+    if (!servoObjW2.attached()) {
       servoObjW2.attach(servoW2);
-      delay(10);
-      if (servoObjW2.attached()) {
-        for (int pulselen = servoObjW2.read(); pulselen < W2_Lo_Winkel; pulselen++) {
-          servoObjW2.write(pulselen);  
-          delay(W2_Geschwindigkeit);
-        }  
-      }
+      delay(200);
+    }
+    
+    if (servoObjW2.read() != W2_Hi_Winkel){
+      for (int pulselen = servoObjW2.read(); pulselen < W2_Hi_Winkel; pulselen++) {
+        servoObjW2.write(pulselen);  
+        delay(W2_Geschwindigkeit);
+      }  
     }
     digitalWrite(relayW2,lo);
     
   } else {
     Serial.println("Weiche2 HIGH");
-    if (servoObjW2.read() != W2_Hi_Winkel  ){
+    if (!servoObjW2.attached()) {
       servoObjW2.attach(servoW2);
-      delay(10);
-      if (servoObjW2.attached()) {
-        for (int pulselen = servoObjW2.read(); pulselen > W2_Hi_Winkel; pulselen--) {
-          servoObjW2.write(pulselen);  
-          delay(W2_Geschwindigkeit);
-        }
+      delay(200); 
+    }
+    
+    if (servoObjW2.read() != W2_Lo_Winkel){
+      for (int pulselen = servoObjW2.read(); pulselen > W2_Lo_Winkel; pulselen--) {
+        servoObjW2.write(pulselen);  
+        delay(W2_Geschwindigkeit);
       }
     }
     digitalWrite(relayW2,hi);
   }
-  
 
 /*
  * Weiche 3
  */
-    if (digitalRead(optoW3) == hi) {
-    Serial.println("Weiche2 HIGH");
-    if (servoObjW3.read() != W3_Hi_Winkel){
+  if (digitalRead(optoW3) == lo) {
+    Serial.println("Weiche3 LOW");
+    if (!servoObjW3.attached()) {
       servoObjW3.attach(servoW3);
-      delay(10);
-      if (servoObjW3.attached()) {
-        for (int pulselen = servoObjW3.read(); pulselen < W3_Hi_Winkel; pulselen++) {
-          servoObjW3.write(pulselen);  
-          delay(W3_Geschwindigkeit);
-        }  
+      delay(200);
+    }
+    
+    if (servoObjW3.read() != W3_Hi_Winkel){
+      for (int pulselen = servoObjW3.read(); pulselen < W3_Hi_Winkel; pulselen++) {
+        servoObjW3.write(pulselen);  
+        delay(W3_Geschwindigkeit);
+      }  
+    }
+    digitalWrite(relayW3,lo);
+    
+  } else {
+    Serial.println("Weiche3 HIGH");
+    if (!servoObjW3.attached()) {
+      servoObjW3.attach(servoW3);
+      delay(200); 
+    }
+    
+    if (servoObjW3.read() != W3_Lo_Winkel){
+      for (int pulselen = servoObjW3.read(); pulselen > W3_Lo_Winkel; pulselen--) {
+        servoObjW3.write(pulselen);  
+        delay(W3_Geschwindigkeit);
       }
     }
     digitalWrite(relayW3,hi);
-    
-  } else {
-    Serial.println("Weiche3 LOW");
-    if (servoObjW3.read() != W3_Lo_Winkel  ){
-      servoObjW3.attach(servoW3);
-      delay(10);
-      if (servoObjW3.attached()) {
-        for (int pulselen = servoObjW3.read(); pulselen > W3_Lo_Winkel; pulselen--) {
-          servoObjW3.write(pulselen);  
-          delay(W3_Geschwindigkeit);
-        }
-      }
-    }
-    digitalWrite(relayW3,lo);
   }
-
-
-/*
-* Weiche 4
- */
-  if (digitalRead(optoW4) == hi) {
-    Serial.println("Weiche4 HIGH");
-    if (servoObjW4.read() != W4_Hi_Winkel){
-      servoObjW4.attach(servoW4);
-      delay(200);
-      if (servoObjW4.attached()) {
-        for (int pulselen = servoObjW4.read(); pulselen < W4_Hi_Winkel; pulselen++) {
-          servoObjW4.write(pulselen);  
-          delay(W4_Geschwindigkeit);
-        }  
-      }
-    }
-    digitalWrite(relayW4,hi);
-    
-  } else {
-    Serial.println("Weiche4 LOW");
-    if (servoObjW4.read() != W4_Lo_Winkel  ){
-      servoObjW4.attach(servoW4);
-      delay(200);
-      if (servoObjW4.attached()) {
-        for (int pulselen = servoObjW4.read(); pulselen > W4_Lo_Winkel; pulselen--) {
-          servoObjW4.write(pulselen);  
-          delay(W4_Geschwindigkeit);
-        }
-      }
-    }
-    digitalWrite(relayW4,lo);
-  }}
+}
