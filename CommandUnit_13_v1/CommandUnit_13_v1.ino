@@ -10,9 +10,9 @@
 #include <Servo.h>
 
 //Weiche 1 Einstellungen(müssen pro Weichen angepasst werden)
-#define W1_Hi_Winkel 87
-#define W1_Lo_Winkel 47
-#define W1_Geschwindigkeit 5
+#define W1_Hi_Winkel 130
+#define W1_Lo_Winkel 90
+#define W1_Geschwindigkeit 50
 
 //Weiche 2 Einstellungen(müssen pro Weichen angepasst werden)
 #define W2_Hi_Winkel 97
@@ -123,73 +123,6 @@ void loop() {
     }
     digitalWrite(relayW1,hi);
   }
-
-/*
- * Weiche 2
- */
-  if (digitalRead(optoW2) == lo) {
-    Serial.println("Weiche2 LOW");
-    if (!servoObjW2.attached()) {
-      servoObjW2.attach(servoW2);
-      delay(200);
-    }
-    
-    if (servoObjW2.read() != W2_Hi_Winkel){
-      for (int pulselen = servoObjW2.read(); pulselen < W2_Hi_Winkel; pulselen++) {
-        servoObjW2.write(pulselen);  
-        delay(W2_Geschwindigkeit);
-      }  
-    }
-    digitalWrite(relayW2,lo);
-    
-  } else {
-    Serial.println("Weiche2 HIGH");
-    if (!servoObjW2.attached()) {
-      servoObjW2.attach(servoW2);
-      delay(200); 
-    }
-    
-    if (servoObjW2.read() != W2_Lo_Winkel){
-      for (int pulselen = servoObjW2.read(); pulselen > W2_Lo_Winkel; pulselen--) {
-        servoObjW2.write(pulselen);  
-        delay(W2_Geschwindigkeit);
-      }
-    }
-    digitalWrite(relayW2,hi);
-  }
-
-/*
- * Weiche 3
- */
-  if (digitalRead(optoW3) == lo) {
-    Serial.println("Weiche3 LOW");
-    if (!servoObjW3.attached()) {
-      servoObjW3.attach(servoW3);
-      delay(200);
-    }
-    
-    if (servoObjW3.read() != W3_Hi_Winkel){
-      for (int pulselen = servoObjW3.read(); pulselen < W3_Hi_Winkel; pulselen++) {
-        servoObjW3.write(pulselen);  
-        delay(W3_Geschwindigkeit);
-      }  
-    }
-    digitalWrite(relayW3,lo);
-    
-  } else {
-    Serial.println("Weiche3 HIGH");
-    if (!servoObjW3.attached()) {
-      servoObjW3.attach(servoW3);
-      delay(200); 
-    }
-    
-    if (servoObjW3.read() != W3_Lo_Winkel){
-      for (int pulselen = servoObjW3.read(); pulselen > W3_Lo_Winkel; pulselen--) {
-        servoObjW3.write(pulselen);  
-        delay(W3_Geschwindigkeit);
-      }
-    }
-    digitalWrite(relayW3,hi);
-  }
+  
   Serial.println("--------------");
 }
